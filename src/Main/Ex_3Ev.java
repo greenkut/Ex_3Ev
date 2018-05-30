@@ -30,7 +30,7 @@ public class Ex_3Ev {
 
     static BufferedReader tc = new BufferedReader(new InputStreamReader(System.in));
     
-    static ArrayList<Games> juegos = new ArrayList<>();
+    static ArrayList<Games> games = new ArrayList<>();
 
     public void recover() {
         try {
@@ -38,18 +38,29 @@ public class Ex_3Ev {
             BufferedReader buffer = new BufferedReader(entrada);
 
             String linea = buffer.readLine();
-
+            String codigo, titulo, descripcion;
+            String aux;
+            
             while (linea != null) {
-                StringTokenizer token = new StringTokenizer(linea, "\t-");
-                String codigo = token.nextToken();
-                String titulo = token.nextToken();
-                String descripcion = token.nextToken();
+                
+                StringTokenizer token = new StringTokenizer(linea, "\t");
+                codigo = token.nextToken();
+                aux = token.nextToken();
+                
+                StringTokenizer token2 = new StringTokenizer(aux, "-");
+                if (aux.contains("-")){
+                    titulo = token2.nextToken();
+                    descripcion = token2.nextToken();
+                } else {
+                    titulo = aux;
+                    descripcion = "";
+                }
 
-                juegos.add(new Games(codigo, titulo, descripcion));
+                games.add(new Games(codigo, titulo, descripcion, 1));
                 linea = buffer.readLine();
             }
-            for (int i = 0; i < juegos.size(); i++) {
-                System.out.println(juegos.get(i).readFile());
+            for (int i = 0; i < games.size(); i++) {
+                System.out.println(games.get(i).readFile());
             }
             buffer.close();
 

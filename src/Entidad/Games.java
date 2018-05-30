@@ -13,12 +13,6 @@ public class Games {
     
     public Games(){}
     
-    public Games(String codigo, String titulo, String descripcion){
-        this.codigo = codigo;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-    }
-    
     public Games(String codigo, String titulo, String descripcion, int cantidad){
         this.codigo = codigo;
         this.titulo = titulo;
