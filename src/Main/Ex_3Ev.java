@@ -73,7 +73,8 @@ public class Ex_3Ev {
 
     public Ex_3Ev() throws IOException, Exception {
         con.connect_BDD();
-        //dao_j.juegos_fillDatabase(con.conexion, juegos);
+        recover();
+        //dao_j.juegos_fillDatabase(con.conexion, games);
         start();
     }
 
