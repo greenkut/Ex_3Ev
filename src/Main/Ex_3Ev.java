@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -29,26 +31,34 @@ public class Ex_3Ev {
     Conexion_DAO con = new Conexion_DAO();
 
     static BufferedReader tc = new BufferedReader(new InputStreamReader(System.in));
-    
+
     static ArrayList<Games> games = new ArrayList<>();
 
     public void recover() {
         try {
+            LocalDate today = LocalDate.now();
+            LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
+            LocalDate yesterday = tomorrow.minusDays(2);
+
+            System.out.println(today);
+            System.out.println(tomorrow);
+            System.out.println(yesterday);
+
             FileReader entrada = new FileReader("C:\\Users\\Javier\\Documents\\NetBeansProjects\\EX_JCutillas\\juegos.txt");
             BufferedReader buffer = new BufferedReader(entrada);
 
             String linea = buffer.readLine();
             String codigo, titulo, descripcion;
             String aux;
-            
+
             while (linea != null) {
-                
+
                 StringTokenizer token = new StringTokenizer(linea, "\t");
                 codigo = token.nextToken();
                 aux = token.nextToken();
-                
+
                 StringTokenizer token2 = new StringTokenizer(aux, "-");
-                if (aux.contains("-")){
+                if (aux.contains("-")) {
                     titulo = token2.nextToken();
                     descripcion = token2.nextToken();
                 } else {
@@ -117,9 +127,7 @@ public class Ex_3Ev {
     DAO_Games dao_G = new DAO_Games();
     DAO_Partners dao_P = new DAO_Partners();
     DAO_Loans dao_L = new DAO_Loans();
-    
-    
-    
+
     public void games() throws IOException, Exception {
         int opc;
         do {
@@ -132,7 +140,7 @@ public class Ex_3Ev {
                     + "6.Back to menu\n"
                     + "Choose an option: ");
             opc = Integer.parseInt(tc.readLine());
-            
+
             while (opc < 1 || opc > 6) {
                 System.out.print("Option not valid, enter again: ");
                 opc = Integer.parseInt(tc.readLine());
@@ -140,7 +148,7 @@ public class Ex_3Ev {
             menu_games(opc);
         } while (opc != 6);
     }
-    
+
     public void partners() throws IOException, Exception {
         int opc;
         do {
@@ -154,7 +162,7 @@ public class Ex_3Ev {
                     + "7.Back to menu\n"
                     + "Choose an option: ");
             opc = Integer.parseInt(tc.readLine());
-            
+
             while (opc < 1 || opc > 7) {
                 System.out.print("Option not valid, enter again: ");
                 opc = Integer.parseInt(tc.readLine());
@@ -162,7 +170,7 @@ public class Ex_3Ev {
             menu_partners(opc);
         } while (opc != 7);
     }
-    
+
     public void loans() throws IOException, Exception {
         int opc;
         do {
@@ -175,7 +183,7 @@ public class Ex_3Ev {
                     + "6.Back to menu\n"
                     + "Choose an option: ");
             opc = Integer.parseInt(tc.readLine());
-            
+
             while (opc < 1 || opc > 6) {
                 System.out.print("Option not valid, enter again: ");
                 opc = Integer.parseInt(tc.readLine());
@@ -183,7 +191,7 @@ public class Ex_3Ev {
             menu_loans(opc);
         } while (opc != 6);
     }
-    
+
     public void menu_games(int opc) throws Exception {
         switch (opc) {
             case 1: // SHOW
@@ -205,7 +213,7 @@ public class Ex_3Ev {
                 break;
         }
     }
-    
+
     public void menu_partners(int opc) throws Exception {
         switch (opc) {
             case 1: // SHOW
@@ -230,7 +238,7 @@ public class Ex_3Ev {
                 break;
         }
     }
-    
+
     public void menu_loans(int opc) throws Exception {
         switch (opc) {
             case 1: // SHOW
@@ -246,7 +254,7 @@ public class Ex_3Ev {
                 dao_L.search(con.conexion);
                 break;
             case 5: // DELETE
-               dao_L.delete(con.conexion);
+                dao_L.delete(con.conexion);
                 break;
             case 6: // BACK TO MENU
                 break;
