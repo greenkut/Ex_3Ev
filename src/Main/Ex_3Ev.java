@@ -36,6 +36,7 @@ public class Ex_3Ev {
 
     public void recover() {
         try {
+            LocalDate date = LocalDate.of(1989, 11, 11);
             LocalDate today = LocalDate.now();
             LocalDate tomorrow = today.plus(1, ChronoUnit.DAYS);
             LocalDate yesterday = tomorrow.minusDays(2);
